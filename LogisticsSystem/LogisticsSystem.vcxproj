@@ -15,8 +15,7 @@
     <Keyword>QtVS_v304</Keyword>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0</WindowsTargetPlatformVersion>
-    <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')"
-      >$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
+    <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
@@ -46,11 +45,8 @@
     <QtModules>core;gui;printsupport;widgets</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
-  <Target Name="QtMsBuildNotFound"
-    BeforeTargets="CustomBuild;ClCompile"
-    Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
-    <Message Importance="High"
-      Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
+  <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
+    <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
   </Target>
   <ImportGroup Label="ExtensionSettings" />
   <ImportGroup Label="Shared" />
@@ -96,12 +92,47 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <QtRcc Include="LogisticsSystem.qrc"/>
-    <QtUic Include="LogisticsSystem.ui"/>
-    <QtMoc Include="LogisticsSystem.h"/>
-    <ClCompile Include="LogisticsSystem.cpp"/>
-    <ClCompile Include="main.cpp"/>
-
+    <QtRcc Include="LogisticsSystem.qrc" />
+    <QtUic Include="LogisticsSystem.ui" />
+    <ClCompile Include="Core\DocumentGeneration\Generator.cpp" />
+    <ClCompile Include="Core\DocumentGeneration\ReceiptBuilder.cpp" />
+    <ClCompile Include="Core\DocumentGeneration\WaybillBuilder.cpp" />
+    <ClCompile Include="Core\Entities\Client.cpp" />
+    <ClCompile Include="Core\Entities\Driver.cpp" />
+    <ClCompile Include="Core\Entities\Order.cpp" />
+    <ClCompile Include="Core\Services\Analyzer.cpp" />
+    <ClCompile Include="Core\Services\Calculator.cpp" />
+    <ClCompile Include="Core\Services\Coordinator.cpp" />
+    <ClCompile Include="Core\Services\Notifier.cpp" />
+    <ClCompile Include="Core\Services\OrderHandler.cpp" />
+    <ClCompile Include="Core\Services\Planner.cpp" />
+    <ClCompile Include="Core\Services\Server.cpp" />
+    <ClCompile Include="Core\Services\Tracker.cpp" />
+    <ClCompile Include="GUI\AppInterface.cpp" />
+    <ClCompile Include="GUI\MainWindow.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Core\DocumentGeneration\Generator.h" />
+    <ClInclude Include="Core\DocumentGeneration\ReceiptBuilder.h" />
+    <ClInclude Include="Core\DocumentGeneration\WaybillBuilder.h" />
+    <ClInclude Include="Core\Entities\Client.h" />
+    <ClInclude Include="Core\Entities\Driver.h" />
+    <ClInclude Include="Core\Entities\Order.h" />
+    <ClInclude Include="Core\Interfaces\IDocBuilder.h" />
+    <ClInclude Include="Core\Interfaces\IObserver.h" />
+    <ClInclude Include="Core\Interfaces\IUser.h" />
+    <ClInclude Include="Core\Services\Analyzer.h" />
+    <ClInclude Include="Core\Services\Calculator.h" />
+    <ClInclude Include="Core\Services\Coordinator.h" />
+    <ClInclude Include="Core\Services\Notifier.h" />
+    <ClInclude Include="Core\Services\OrderHandler.h" />
+    <ClInclude Include="Core\Services\Planner.h" />
+    <ClInclude Include="Core\Services\Server — копия (7).h" />
+    <ClInclude Include="Core\Services\Server.h" />
+    <ClInclude Include="Core\Services\Tracker.h" />
+    <ClInclude Include="GUI\AppInterface.h" />
+    <QtMoc Include="GUI\MainWindow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

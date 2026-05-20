@@ -1,10 +1,9 @@
-#include "LogisticsSystem.h"
-#include <QtWidgets/QApplication>
+#include <QApplication>
+#include "GUI/MainWindow.h"
 
-int main(int argc, char *argv[])
-{
-    QApplication app(argc, argv);
-    LogisticsSystem window;
-    window.show();
-    return app.exec();
+int main(int argc, char* argv[]) {
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
+    return a.exec();
 }
