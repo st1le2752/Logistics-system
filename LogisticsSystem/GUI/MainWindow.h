@@ -6,6 +6,9 @@
 #include <QVBoxLayout>
 #include <QWidget>
 #include <QTextEdit>
+#include <QLineEdit>
+#include <QLabel>
+#include "../Core/Services/Server.h"
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -17,8 +20,14 @@ public:
 private:
     QWidget* centralWidget;
     QVBoxLayout* mainLayout;
+    QLabel* weightLabel;
+    QLineEdit* weightInput;
+    QLabel* distanceLabel;
+    QLineEdit* distanceInput;
     QPushButton* createOrderBtn;
     QTextEdit* logConsole;
+
+    Server* server;
 
 private slots:
     void handleCreateOrder();
