@@ -12,9 +12,11 @@ public:
     double getDistance() const;
     double getPrice() const;
     std::string getStatus() const;
+    std::string getDriverName() const;
 
     void setPrice(double newPrice);
     void setStatus(const std::string& newStatus);
+    void setDriverName(const std::string& name);
 
 private:
     int id;
@@ -22,6 +24,7 @@ private:
     double distance;
     double price;
     std::string status;
+    std::string driverName;
 };
 
 #endif

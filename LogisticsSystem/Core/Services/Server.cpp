@@ -3,6 +3,9 @@
 
 Server::Server() : nextOrderId(1) {
     orderHandler = new OrderHandler();
+
+    orderHandler->registerDriver(new Driver("Ivan (Truck 1)"));
+    orderHandler->registerDriver(new Driver("Alex (Truck 2)"));
 }
 
 Server::~Server() {
@@ -14,8 +17,9 @@ std::string Server::processNewOrderRequest(double weight, double distance) {
 
     std::ostringstream oss;
     oss << "Order #" << order->getId()
-        << " created. Status: " << order->getStatus()
-        << " | Price: $" << order->getPrice();
+        << " | Status: " << order->getStatus()
+        << " | Price: $" << order->getPrice()
+        << " | Driver: " << (order->getDriverName().empty() ? "NONE" : order->getDriverName());
 
     delete order;
     return oss.str();
