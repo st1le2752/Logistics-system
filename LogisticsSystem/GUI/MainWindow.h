@@ -25,12 +25,14 @@ private:
     QLabel* distanceLabel;
     QLineEdit* distanceInput;
     QPushButton* createOrderBtn;
+    QPushButton* simulateStepBtn;
     QTextEdit* logConsole;
 
     Server* server;
 
 private slots:
     void handleCreateOrder();
+    void handleSimulateStep();
 };
 
 #endif

@@ -1,4 +1,6 @@
 #include "MainWindow.h"
+#include <QString>
+#include <vector>
 
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
     setWindowTitle("Cargo Logistics System");
@@ -26,11 +28,15 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
     createOrderBtn = new QPushButton("Create New Order", this);
     mainLayout->addWidget(createOrderBtn);
 
+    simulateStepBtn = new QPushButton("Simulate Movement Step (+25%)", this);
+    mainLayout->addWidget(simulateStepBtn);
+
     logConsole = new QTextEdit(this);
     logConsole->setReadOnly(true);
     mainLayout->addWidget(logConsole);
 
     connect(createOrderBtn, &QPushButton::clicked, this, &MainWindow::handleCreateOrder);
+    connect(simulateStepBtn, &QPushButton::clicked, this, &MainWindow::handleSimulateStep);
 }
 
 MainWindow::~MainWindow() {
@@ -48,5 +54,19 @@ void MainWindow::handleCreateOrder() {
     }
     else {
         logConsole->append("Error: Invalid input for weight or distance.");
+    }
+}
+
+void MainWindow::handleSimulateStep() {
+    server->simulateSimulationStep();
+    std::vector<std::string> notifications = server->getNotifications();
+
+    if (notifications.empty()) {
+        logConsole->append("Simulation step: No active movements or already delivered.");
+    }
+    else {
+        for (const std::string& msg : notifications) {
+            logConsole->append(QString::fromStdString(">> " + msg));
+        }
     }
 }

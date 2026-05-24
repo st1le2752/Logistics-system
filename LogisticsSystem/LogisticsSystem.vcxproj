@@ -121,6 +121,7 @@
     <ClInclude Include="Core\Entities\Order.h" />
     <ClInclude Include="Core\Interfaces\IDocBuilder.h" />
     <ClInclude Include="Core\Interfaces\IObserver.h" />
+    <ClInclude Include="Core\Interfaces\ISubject.h" />
     <ClInclude Include="Core\Interfaces\IUser.h" />
     <ClInclude Include="Core\Services\Analyzer.h" />
     <ClInclude Include="Core\Services\Calculator.h" />
