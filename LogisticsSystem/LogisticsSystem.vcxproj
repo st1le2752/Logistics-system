@@ -113,6 +113,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Core\DocumentGeneration\Document.h" />
     <ClInclude Include="Core\DocumentGeneration\Generator.h" />
     <ClInclude Include="Core\DocumentGeneration\ReceiptBuilder.h" />
     <ClInclude Include="Core\DocumentGeneration\WaybillBuilder.h" />

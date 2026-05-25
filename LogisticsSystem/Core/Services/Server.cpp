@@ -6,6 +6,7 @@ Server::Server() : nextOrderId(1), currentProgressStep(0.0) {
     tracker = new Tracker();
     analyzer = new Analyzer();
     notifier = new Notifier();
+    generator = new Generator();
 
     tracker->attach(analyzer);
     analyzer->attach(notifier);
@@ -19,6 +20,7 @@ Server::~Server() {
     delete tracker;
     delete analyzer;
     delete notifier;
+    delete generator;
     for (Order* order : activeOrders) {
         delete order;
     }
@@ -56,4 +58,25 @@ void Server::simulateSimulationStep() {
 
 std::vector<std::string> Server::getNotifications() {
     return notifier->fetchUnreadMessages();
+}
+
+std::string Server::generateOrderDocument(int orderId) {
+    Order* targetOrder = nullptr;
+    for (Order* o : activeOrders) {
+        if (o->getId() == orderId) {
+            targetOrder = o;
+            break;
+        }
+    }
+
+    if (!targetOrder) {
+        return "";
+    }
+
+    WaybillBuilder builder;
+    Document* doc = generator->createDocument(&builder, targetOrder);
+    std::string result = doc->getFullText();
+    delete doc;
+
+    return result;
 }
